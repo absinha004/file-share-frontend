@@ -2,7 +2,8 @@ import { io } from "socket.io-client";
 
 export function initConnection({ roomId, onMessage, onFile, onPeerDisconnected }) {
   // Change this to your backend URL in prod
-  const SIGNALING_URL = "http://localhost:5000";
+  const SIGNALING_URL = process.env.REACT_APP_SIGNALING_URL;
+
   const socket = io(SIGNALING_URL);
 
   const pc = new RTCPeerConnection({

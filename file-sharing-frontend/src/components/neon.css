@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ANIMATED BACKGROUND */
+body {
+  background: linear-gradient(-45deg, #000000, #0f0f1f, #1a0033, #000000);
+  background-size: 400% 400%;
+  animation: gradientMove 15s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Neon Title Flicker */
+.neon-title {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #ff2d95;
+  text-shadow: 0 0 10px #ff2d95, 0 0 20px #ff2d95, 0 0 40px #ff2d95;
+}
+
+.neon-button {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(90deg, #00f5ff, #ff2d95);
+  border: none;
+  color: black;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #00f5ff, 0 0 20px #ff2d95;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.neon-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #00f5ff, 0 0 40px #ff2d95;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 5px #00f5ff,
+      0 0 10px #00f5ff,
+      0 0 20px #00f5ff,
+      0 0 40px #00f5ff;
+  }
+  50% {
+    box-shadow:
+      0 0 10px #00f5ff,
+      0 0 20px #00f5ff,
+      0 0 30px #00f5ff,
+      0 0 60px #00f5ff;
+  }
+}
+
+/* Particle Background */
+.particle-bg {
+  background: transparent;
+  position: absolute;
+}
+
+.particle-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 1px, transparent 1px);
+  background-size: 3px 3px;
+  animation: particleMove 60s linear infinite;
+}
+
+@keyframes particleMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 1000px 1000px; }
+}

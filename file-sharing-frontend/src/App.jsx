@@ -1,54 +1,50 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import Home from './components/Home';
+import JoinRoom from './components/JoinRoom';
 import Room from './components/Room';
+import AnimatedBackground from './components/AnimatedBackground';
 
 export default function App() {
-  const [roomId, setRoomId] = useState('');
-  const [joined, setJoined] = useState(false);
+  const joinRef = useRef(null);
+  const location = useLocation();
+  const showBackground = !location.pathname.startsWith('/room/');
+
+  const scrollToJoin = () => {
+    joinRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-black via-gray-900 to-black text-white font-sans">
-      {!joined ? (
-        <div className="bg-gray-900 p-8 rounded-lg shadow-neonBlue w-full max-w-md">
-          <h1 className="text-3xl font-bold mb-6 text-neonPink drop-shadow-[0_0_10px_#ff2d95] text-center">
-            🚀 File-share (P2P)
-          </h1>
+    <div className="relative min-h-screen text-white font-sans overflow-x-hidden">
+      {showBackground && <AnimatedBackground />}
 
-          <input
-            value={roomId}
-            onChange={(e) => setRoomId(e.target.value)}
-            placeholder="Room ID"
-            className="w-full p-3 rounded-md bg-black border border-gray-700 text-white focus:outline-none focus:border-neonPink mb-4"
-          />
+      <Routes>
+        {/* Main landing page */}
+        <Route
+          path="/"
+          element={
+            <>
+              {/* Section 1: Home */}
+              <section className="min-h-screen flex items-center justify-center">
+                <Home onStart={scrollToJoin} />
+              </section>
 
-          <div className="flex justify-between">
-            <button
-              onClick={() => setJoined(true)}
-              className="flex-1 mr-2 px-4 py-2 bg-neonBlue text-black font-bold rounded-md shadow-neonBlue hover:scale-105 transition"
-            >
-              Join
-            </button>
+              {/* Section 2: Join/Create Room */}
+              <div style={{ position: 'relative', zIndex: 1 }}>
+                <section
+                  ref={joinRef}
+                  className="min-h-screen flex items-center justify-center"
+                >
+                  <JoinRoom />
+                </section>
+              </div>
+            </>
+          }
+        />
 
-            <a
-              href="#"
-              onClick={async (e) => {
-                e.preventDefault();
-                const url =
-                  (process.env.REACT_APP_SIGNALING_URL || 'http://localhost:5000') +
-                  '/create-room';
-                const res = await fetch(url);
-                const j = await res.json();
-                setRoomId(j.roomId);
-                setJoined(true);
-              }}
-              className="flex-1 ml-2 px-4 py-2 bg-neonPink text-white font-bold rounded-md shadow-neonPink hover:scale-105 transition text-center"
-            >
-              Create Room
-            </a>
-          </div>
-        </div>
-      ) : (
-        <Room roomId={roomId} />
-      )}
+        {/* Room page */}
+        <Route path="/room/:roomId" element={<Room />} />
+      </Routes>
     </div>
   );
 }
