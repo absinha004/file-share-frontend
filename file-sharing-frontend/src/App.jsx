@@ -33,14 +33,14 @@ export default function App() {
               onClick={async (e) => {
                 e.preventDefault();
                 const url =
-                  (import.meta.env.VITE_SIGNALING_URL || 'http://localhost:5000') +
+                  (process.env.REACT_APP_SIGNALING_URL || 'http://localhost:5000') +
                   '/create-room';
                 const res = await fetch(url);
                 const j = await res.json();
                 setRoomId(j.roomId);
                 setJoined(true);
               }}
-              className="flex-1 ml-2 px-4 py-2 bg-neonPink text-white font-bold rounded-md shadow-neon hover:scale-105 transition text-center"
+              className="flex-1 ml-2 px-4 py-2 bg-neonPink text-white font-bold rounded-md shadow-neonPink hover:scale-105 transition text-center"
             >
               Create Room
             </a>

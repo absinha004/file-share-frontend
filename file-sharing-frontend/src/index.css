@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-black text-white font-sans;
+/* optional: custom neon shadow utilities */
+@layer utilities {
+  .shadow-neonPink {
+    box-shadow: 0 0 10px #ff2d95, 0 0 20px #ff2d95;
+  }
+  .shadow-neonBlue {
+    box-shadow: 0 0 10px #00eaff, 0 0 20px #00eaff;
+  }
 }

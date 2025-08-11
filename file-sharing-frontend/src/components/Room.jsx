@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { io } from 'socket.io-client';
 
-const SIGNALING_URL = import.meta.env.VITE_SIGNALING_URL || 'http://localhost:5000';
+const SIGNALING_URL = process.env.REACT_APP_SIGNALING_URL|| 'http://localhost:5000';
 const STUN_SERVERS = [{ urls: 'stun:stun.l.google.com:19302' }];
 const CHUNK_SIZE = 64 * 1024; // 64KB
 const BACKPRESSURE_THRESHOLD = 1 * 1024 * 1024; // 1MB
