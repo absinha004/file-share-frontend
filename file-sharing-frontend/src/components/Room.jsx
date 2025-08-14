@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
 
-const signalingServer = process.env.REACT_APP_SIGNALING_URL || 'http://localhost:5000';
+const signalingServer = process.env.REACT_APP_SIGNALING_URL;
 
 export default function Room() {
   const { roomId } = useParams();

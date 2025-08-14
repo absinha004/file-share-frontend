@@ -18,7 +18,7 @@ export default function JoinRoom() {
     try {
       setLoading(true);
       const res = await fetch(
-        (process.env.REACT_APP_SIGNALING_URL || 'http://localhost:5000') + '/create-room'
+        (process.env.REACT_APP_SIGNALING_URL) + '/create-room'
       );
       if (!res.ok) throw new Error('Failed to create room');
       const j = await res.json();
