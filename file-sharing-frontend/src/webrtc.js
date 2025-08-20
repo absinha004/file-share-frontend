@@ -8,7 +8,8 @@ export function initConnection({ roomId, onMessage, onFile, onPeerDisconnected }
 
   const pc = new RTCPeerConnection({
     iceServers: [
-      { urls: "stun:stun.l.google.com:19302" } // free STUN server
+      { urls: "stun:stun.l.google.com:19302" }, // free STUN server
+      { urls: "turn:turn.anyfirewall.com:443?transport=tcp" } //TURN testing server
     ]
   });
 
